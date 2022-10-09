@@ -12,5 +12,5 @@ RUN sudo apt-get -y install ./zulu-repo_1.0.0-3_all.deb && sudo apt-get -y updat
 WORKDIR /root
 COPY /install.properties .
 COPY /docker-entrypoint.sh .
-ADD https://github.com/aakashnand/trino-ranger-demo/releases/download/trino-ranger-demo-v1.0/ranger-2.1.0-admin.tar.gz /root
+ADD https://github.com/MustafaMirza45/Apache-ranger-kubernetes/releases/download/v1.0/ranger-${RANGER_VERSION}-admin.tar.gz /root
 ENV JAVA_HOME=/usr/lib/jvm/zulu11
