@@ -13,4 +13,4 @@ WORKDIR /root
 ENV JAVA_HOME=/usr/lib/jvm/zulu-21-arm64
 COPY /install.properties .
 COPY /docker-entrypoint.sh .
-COPY /ranger-3.0.0-SNAPSHOT-admin.tar.gz /root
+ADD https://github.com/MustafaMirza45/Apache-ranger-kubernetes/releases/download/v1.0/ranger-3.0.0-SNAPSHOT-admin.tar.gz /root
