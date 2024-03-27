@@ -25,6 +25,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "ranger.serviceAccountName" . }}
+      
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -38,6 +39,7 @@ spec:
               containerPort: 6080
               protocol: TCP
           livenessProbe:
+            initialDelaySeconds: 6000000
             httpGet:
               path: /
               port: http
@@ -47,12 +49,14 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          command:
-            - "sh"
-            - "-c"
-            - | 
-              tar xvf ranger-2.1.0-admin.tar.gz
-              ./docker-entrypoint.sh
+          # command:
+          #   - "sh"
+          #   - "-c"
+          #   - | 
+          #     export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+          #     export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
+          #     echo $HADOOP_OPTS
+          #     ./docker-entrypoint.sh
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -1,5 +1,5 @@
 #!/bin/bash
-RANGER_VERSION=2.3.0
-chown root:root -R /ranger-${RANGER_VERSION}-trino-plugin/* && \
-/ranger-${RANGER_VERSION}-trino-plugin/enable-trino-plugin.sh
+RANGER_VERSION=ranger-3.0.0-SNAPSHOT-trino-plugin
+chown root:root -R /${RANGER_VERSION}/* && \
+/${RANGER_VERSION}/enable-trino-plugin.sh
 # /usr/lib/trino/bin/run-trino

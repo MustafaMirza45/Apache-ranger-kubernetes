@@ -65,7 +65,7 @@ spec:
           env:
             {{- toYaml .Values.env | nindent 12 }}
           volumeMounts:
-            - mountPath: {{ .Values.server.config.path }}
+            - mountPath: etc/temp
               name: config-volume
             - mountPath: {{ .Values.server.config.path }}/catalog
               name: catalog-volume
@@ -87,15 +87,15 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /v1/info
-              port: http
-            initialDelaySeconds: {{ .Values.coordinator.livenessProbe.initialDelaySeconds | default 20 }}
-            periodSeconds: {{ .Values.coordinator.livenessProbe.periodSeconds | default 10 }}
-            timeoutSeconds: {{ .Values.coordinator.livenessProbe.timeoutSeconds | default 5 }}
-            failureThreshold: {{ .Values.coordinator.livenessProbe.failureThreshold | default 6 }}
-            successThreshold: {{ .Values.coordinator.livenessProbe.successThreshold | default 1 }}
+          # livenessProbe:
+          #   httpGet:
+          #     path: /v1/info
+          #     port: http
+          #   initialDelaySeconds: {{ .Values.coordinator.livenessProbe.initialDelaySeconds | default 20 }}
+          #   periodSeconds: {{ .Values.coordinator.livenessProbe.periodSeconds | default 10 }}
+          #   timeoutSeconds: {{ .Values.coordinator.livenessProbe.timeoutSeconds | default 5 }}
+          #   failureThreshold: {{ .Values.coordinator.livenessProbe.failureThreshold | default 6 }}
+          #   successThreshold: {{ .Values.coordinator.livenessProbe.successThreshold | default 1 }}
           readinessProbe:
             httpGet:
               path: /v1/info
@@ -111,9 +111,9 @@ spec:
             - "sh"
             - "-c"
             - |
-              ls
-              pwd
+              cp -R etc/temp/ etc/trino/
               ./docker-entrypoint.sh
+              usr/lib/trino/bin/run-trino
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

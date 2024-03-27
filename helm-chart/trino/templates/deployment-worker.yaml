@@ -47,7 +47,7 @@ spec:
           env:
             {{- toYaml .Values.env | nindent 12 }}
           volumeMounts:
-            - mountPath: {{ .Values.server.config.path }}
+            - mountPath: etc/temp
               name: config-volume
             - mountPath: {{ .Values.server.config.path }}/catalog
               name: catalog-volume
@@ -81,9 +81,9 @@ spec:
             - "sh"
             - "-c"
             - | 
-              ls
-              pwd
+              cp -R etc/temp/ etc/trino/
               ./docker-entrypoint.sh
+              usr/lib/trino/bin/run-trino
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

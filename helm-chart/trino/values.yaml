@@ -3,10 +3,10 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: mustafamirza45/trino-v1.1
+  repository: mustafamirza45/ranger-trino
   pullPolicy: Always
   # Overrides the image tag whose default is the chart version.
-  tag: test
+  tag: latest
 
 imagePullSecrets:
   - name: registry-credentials
@@ -118,15 +118,15 @@ initContainers: {}
   #   - name: init-coordinator
   #     image: busybox:1.28
   #     imagePullPolicy: IfNotPresent
-  #     command: ['sh', '-c', "until nslookup myservice.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
+  #     command: ['sh', '-c', "./docker-entrypoint.sh"]
   # worker:
   #   - name: init-worker
   #     image: busybox:1.28
-  #     command: ['sh', '-c', 'echo The worker is running! && sleep 3600']
+  #     command: ['sh', '-c', './docker-entrypoint.sh']
 
 securityContext:
-  runAsUser: 1000
-  runAsGroup: 1000
+  runAsUser: 0
+  runAsGroup: 0
 
 service:
   type: ClusterIP

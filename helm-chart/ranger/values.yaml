@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: mustafamirza45/apache-ranger-admin
+  repository: mustafamirza45/ranger-admin
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0"
+  tag: v3
 
 imagePullSecrets: []
 nameOverride: ""

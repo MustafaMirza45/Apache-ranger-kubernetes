@@ -1,7 +1,7 @@
-FROM trinodb/trino:384 
+FROM trinodb/trino:436
 USER root
 COPY /docker-entrypoint.sh . 
-COPY /ranger-2.3.0-trino-plugin ./ranger-2.3.0-trino-plugin
+COPY /ranger-3.0.0-SNAPSHOT-trino-plugin ./ranger-3.0.0-SNAPSHOT-trino-plugin
 RUN ./docker-entrypoint.sh
 COPY ./hudi-presto-bundle-0.10.1.jar /usr/lib/trino/plugin/hive/
 COPY ./jmx_prometheus_javaagent.jar /usr/lib/trino/plugin/jmx/
